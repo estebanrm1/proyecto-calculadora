@@ -3,7 +3,7 @@
 .container input{
 
     background: black;
-    color: rgb(6,162,160);
+    color: rgb(236, 43, 43);
     height: 50px;
     width: 100px;
     border-radius: 10px;
@@ -21,16 +21,16 @@
 
 .full{
 
-    border: 10px solid rgb(76,240,237);
+    border: 10px solid rgb(92, 76, 240);
     margin: 2px;
     padding: 12px;
     border-radius: 20px;
-    background-image: url(../assets/img/fondo5.jpg);
+    background-image: url(../assets/img/imagenbinario.jpg);
 }
 
 input[type="text"]{
 
-    color: white;
+    color: rgb(236, 43, 43);
     text-align: center;
 
 }
@@ -45,6 +45,6 @@ input[type="text"]{
 .card{
 
     margin-top: 22px;
-    background-color: black;
-    border:1px dashed rgb(251,251,250);
+    background: black;
+    border:1px dashed rgb(236, 43, 43);
 }
