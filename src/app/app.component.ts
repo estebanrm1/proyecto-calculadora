@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,13 @@ export class AppComponent implements OnInit {
   b:any;
   c:any;
   d="";
-  e=""
+  e="";
+
+  @ViewChild('mostrarOperaciones', { static: true }) mostrarOperaciones!: ElementRef;
+
+  constructor(private renderer:Renderer2){
+
+  }
 
   ngOnInit(): void {
     
@@ -83,8 +89,15 @@ export class AppComponent implements OnInit {
       this.screen = (parseInt(this.screen) / parseInt(this.c)).toString();
     }
 
-  //this.clear();
+  this.clear();
 
+  }
+
+
+  //Se crea de forma dinamica el history mediante el DOM
+
+  crearHtml(operacion:string, resultado:string){
+    
   }
 
 }
