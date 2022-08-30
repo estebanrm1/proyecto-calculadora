@@ -29,14 +29,62 @@ export class AppComponent implements OnInit {
       this.screen = this.screen + value;
       this.c= this.d;
 
+
+      
+
     }else{
 
       this.screen =this.screen + value;
       this.a= this.screen;
+      
     }
 
 
   }
 
+
+  condition(value: string){
+
+    this.screen=this.screen+value;
+    this.b = value;
+  }
+
+  clear(){
+    this.screen = "";
+    this.a = "";
+    this.b = "";
+    this.c = "";
+    this.d = "";
+
+  }
+
+  result(){
+    if(this.b=='+'){
+
+      this.screen =`${this.screen} = ${(parseInt(this.a) + parseInt(this.c)).toString()}`; 
+      this.screen = (parseInt(this.screen) + parseInt(this.c)).toString();
+    }
+
+    if(this.b=='-'){
+
+      this.screen =`${this.screen} = ${(parseInt(this.a) - parseInt(this.c)).toString()}`; 
+      this.screen = (parseInt(this.screen) - parseInt(this.c)).toString();
+    }
+
+    if(this.b=='*'){
+
+      this.screen =`${this.screen} = ${(parseInt(this.a) * parseInt(this.c)).toString()}`; 
+      this.screen = (parseInt(this.screen) * parseInt(this.c)).toString();
+    }
+
+    if(this.b=='/'){
+
+      this.screen =`${this.screen} = ${(parseInt(this.a) / parseInt(this.c)).toString()}`; 
+      this.screen = (parseInt(this.screen) / parseInt(this.c)).toString();
+    }
+
+  //this.clear();
+
+  }
 
 }
