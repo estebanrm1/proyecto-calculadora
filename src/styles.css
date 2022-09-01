@@ -6,3 +6,16 @@ body{
     background-image: url(../assets/img/wallpaperprog.jpg);
 
 }
+
+.resultOperation{
+    margin-top: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(236,43,43);
+}
+
+.operation{
+
+    font-size: 20px;
+    
+}

@@ -16,6 +16,18 @@ export class AppComponent implements OnInit {
   d="";
   e="";
 
+  contenedor: any;
+  arrayOperaciones: any = [];
+  arrayResultados: any = [];
+  verOperaciones: any = [];
+  mostrarStorage: any;
+  buttonHistory: any;
+  btnActive = "text-right";
+  calculadoraPos: any;
+  historyPos: any;
+  estilopos1?:string;
+  estiloPos2?:string;
+
   @ViewChild('mostrarOperaciones', { static: true }) mostrarOperaciones!: ElementRef;
 
   constructor(private renderer:Renderer2){
@@ -29,7 +41,7 @@ export class AppComponent implements OnInit {
   //Calculadora
 
   enterValue(value:string){
-    if ((this.b=="+")||(this.b=="-")||(this.b=="*"||(this.b=="/"))){
+    if ((this.b=="+")||(this.b=="-")||(this.b=="*"||(this.b=="/"))) {
 
       this.d= this.d + value;
       this.screen = this.screen + value;
@@ -67,26 +79,61 @@ export class AppComponent implements OnInit {
   result(){
     if(this.b=='+'){
 
-      this.screen =`${this.screen} = ${(parseInt(this.a) + parseInt(this.c)).toString()}`; 
+      this.screen = `${this.screen} = ${(parseInt(this.a) + parseInt(this.c)).toString()}`; 
       this.screen = (parseInt(this.screen) + parseInt(this.c)).toString();
+
+      //cargar el history
+
+      const operacion = `${this.a}${this.b}${this.c}`;
+      const resultado = this.screen;
+
+      this.crearHtml(operacion, resultado);
+
+
     }
 
     if(this.b=='-'){
 
       this.screen =`${this.screen} = ${(parseInt(this.a) - parseInt(this.c)).toString()}`; 
       this.screen = (parseInt(this.screen) - parseInt(this.c)).toString();
+
+      //cargar el history
+
+      const operacion =`${this.a}${this.b}${this.c}`;
+      const resultado = this.screen;
+
+      this.crearHtml(operacion, resultado);
+
     }
 
     if(this.b=='*'){
 
       this.screen =`${this.screen} = ${(parseInt(this.a) * parseInt(this.c)).toString()}`; 
       this.screen = (parseInt(this.screen) * parseInt(this.c)).toString();
+
+      //cargar el history
+
+      const operacion =`${this.a}${this.b}${this.c}`;
+      const resultado = this.screen;
+
+      this.crearHtml(operacion, resultado);
+
     }
 
     if(this.b=='/'){
 
       this.screen =`${this.screen} = ${(parseInt(this.a) / parseInt(this.c)).toString()}`; 
       this.screen = (parseInt(this.screen) / parseInt(this.c)).toString();
+
+
+      //cargar el history
+
+      const operacion =`${this.a} ${this.b} ${this.c}`;
+      const resultado = this.screen;
+
+      this.crearHtml(operacion, resultado);
+
+
     }
 
   this.clear();
@@ -97,7 +144,39 @@ export class AppComponent implements OnInit {
   //Se crea de forma dinamica el history mediante el DOM
 
   crearHtml(operacion:string, resultado:string){
-    
+
+    const mostrar= {
+      operacion, 
+      resultado
+
+    }
+
+    var containerCard = document.createElement('div');
+    var verOperacion = document.createElement('p');
+    var verResultado = document.createElement('p');
+
+
+    containerCard.classList.add('containerCard');
+    verOperacion.classList.add('operation');
+    verResultado.classList.add('resultOperation');
+
+    containerCard.appendChild(verOperacion);
+    containerCard.appendChild(verResultado);
+
+    this.renderer.appendChild(this.mostrarOperaciones.nativeElement, containerCard);
+
+    this.contenedor = containerCard;
+
+    this.arrayOperaciones = [...this.arrayOperaciones, mostrar];
+
+    this.arrayOperaciones.forEach((element:any)=> {
+
+      this.contenedor.querySelector('.operation' ).innerText = element.operacion;
+      this.contenedor.querySelector('.resultOperation').innerText = element.resultado;
+
+    })
+
+
   }
 
 }
